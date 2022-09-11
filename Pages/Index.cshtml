@@ -1,4 +1,5 @@
 ﻿@page
+@inject Microsoft.FeatureManagement.IFeatureManager _featureManager;
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -9,7 +10,7 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-@if (Model.SecretFeatureEnabled)
+@if (await _featureManager.IsEnabledAsync(FeatureFlags.SecretFeature))
 {
     <partial name="_SecretPage" />
 }
