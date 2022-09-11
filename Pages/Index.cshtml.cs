@@ -8,7 +8,6 @@ namespace FeatureManagement.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly IFeatureManager _featureManager;
-        public bool SecretFeatureEnabled { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger, IFeatureManager featureManager)
         {
@@ -18,8 +17,7 @@ namespace FeatureManagement.Pages
 
         public async void OnGet()
         {
-            SecretFeatureEnabled = await _featureManager.IsEnabledAsync(FeatureFlags.SecretFeature);
-            _logger.LogInformation($"Secret Feature value: {SecretFeatureEnabled}");
+            _logger.LogInformation($"feature value {await _featureManager.IsEnabledAsync(FeatureFlags.SecretFeature)}");
         }
     }
 
